@@ -9,7 +9,7 @@ let movies = [
 ]
 
 app.get("/", (req, res) => {
-  res.json({ message: "Movies API is running"})
+  res.json({ message: "Movies API is running successfully"})
 })
 
 app.get("/movies", (req, res) => {
