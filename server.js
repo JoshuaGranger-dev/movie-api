@@ -36,15 +36,26 @@ app.get("/movies/:id", (req, res) => {
 })
 
 app.post("/movies", (req, res) => {
-  const newMovie = req.body 
+  const { title, rating, watched } = req.body
 
-  if (!newMovie.title || !newMovie.rating || newMovie.watched === undefined) {
+  if (!title || !rating || watched === undefined) {
     return res.status(400).json({ message: "Title, rating, and watched are required" })
+  }
+
+  const newId = movies.length > 0
+    ? Math.max(...movies.map((movie) => movie.id)) + 1
+    : 1
+
+  const newMovie = {
+    id: newId, 
+    title, 
+    rating, 
+    watched
   }
 
   movies.push(newMovie)
 
-  res.json(movies)
+  res.status(201).json(newMovie)
 })
 
 app.delete("/movies/:id", (req, res) => {
