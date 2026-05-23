@@ -38,6 +38,10 @@ app.get("/movies/:id", (req, res) => {
 app.post("/movies", (req, res) => {
   const newMovie = req.body 
 
+  if (!newMovie.title || !newMovie.rating || newMovie.watched === undefined) {
+    return res.status(400).json({ message: "Title, rating, and watched are required" })
+  }
+
   movies.push(newMovie)
 
   res.json(movies)
@@ -61,6 +65,10 @@ app.patch("/movies/:id", (req, res) => {
   const movieId = Number(req.params.id)
 
   const updates = req.body
+
+  if (Object.keys(updates).length === 0) {
+    return res.status(400).json({ message: "At least one field is required to update" })
+  }
 
   const movie = movies.find((movie) => movie.id === movieId)
 
