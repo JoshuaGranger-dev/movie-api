@@ -28,6 +28,10 @@ app.get("/movies/:id", (req, res) => {
 
   const movie = movies.find((movie) => movie.id === movieId)
 
+  if (!movie) {
+    return res.status(404).json({ message: "Movie not found" })
+  }
+
   res.json(movie)
 })
 
@@ -42,6 +46,12 @@ app.post("/movies", (req, res) => {
 app.delete("/movies/:id", (req, res) => {
   const movieId = Number(req.params.id)
 
+  const movie = movies.find((movie) => movie.id === movieId)
+
+  if (!movie) {
+    return res.status(404).json({ message: "Movie not found" })
+  }
+
   movies = movies.filter((movie) => movie.id !== movieId)
 
   res.json(movies)
@@ -51,6 +61,12 @@ app.patch("/movies/:id", (req, res) => {
   const movieId = Number(req.params.id)
 
   const updates = req.body
+
+  const movie = movies.find((movie) => movie.id === movieId)
+
+  if (!movie) {
+    return res.status(404).json({ message: "Movie not found" })
+  }
 
   movies = movies.map((movie) => {
     if (movie.id === movieId) {
