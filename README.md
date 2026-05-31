@@ -41,7 +41,7 @@ This project was built as part of my full-stack development practice to learn ba
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/movie-api.git
+git clone https://github.com/JoshuaGranger-dev/movie-api.git
 ```
 
 2. Go into the project folder:
